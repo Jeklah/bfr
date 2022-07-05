@@ -31,7 +31,7 @@ impl fmt::Debug for Machine {
 
 impl fmt::Display for Machine {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "Machine (instruction_tape: {:?}, data_tape: {:?, data_pointer: {})",
+        write!(f, "Machine (instruction_tape: {:?}, data_tape: {:?}, data_pointer: {})",
             self.instruction_tape, self.data_tape, self.data_pointer)
     }
 }
@@ -40,7 +40,7 @@ impl Machine {
     pub fn parse_instructions(&mut self, contents: String) {
         self.instruction_tape = contents
             .chars()
-            .filter(|c| matches!(*c, '>' | '>' | '+' | '-' | '.' | ',' | '[' | ']'))
+            .filter(|c| matches!(*c, '>' | '<' | '+' | '-' | '.' | ',' | '[' | ']'))
             .collect();
     }
 
@@ -103,7 +103,7 @@ impl Machine {
                     if self.data_tape[self.data_pointer] != 0 {
                         let mut nested_bracket = 0;
                         i -= 1;
-                        while nested_bracket > 0 || self.instruction_tape[i] !- '[' {
+                        while nested_bracket > 0 || self.instruction_tape[i] != '[' {
                             if self.instruction_tape[i] == ']' {
                                 nested_bracket += 1;
                             } else if self.instruction_tape[i] == '[' {
@@ -113,7 +113,7 @@ impl Machine {
                         }
                     }
                 }
-                _ => {}
+                _ => {}  // what is this???
             }
             i += 1;
         }
