@@ -113,7 +113,7 @@ impl Machine {
                         }
                     }
                 }
-                _ => {}  // what is this???
+                _ => {}  // what is this???  I know what this is now! It's a cover-all for the rest of the branches and basically says to resort to default values.
             }
             i += 1;
         }
